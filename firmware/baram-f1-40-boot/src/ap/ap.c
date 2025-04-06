@@ -28,7 +28,7 @@ void apMain(void)
 {
   uint32_t pre_time;
 
-  
+
   pre_time = millis();
   while(1)
   {
@@ -56,7 +56,6 @@ void cliUpdate(void)
 void bootUp(void)
 {
   static bool is_run_fw = true;
-  static bool is_update_fw = false;
 
   uint32_t boot_param;
   uint16_t err_code;
@@ -89,19 +88,9 @@ void bootUp(void)
     resetSetBootMode(boot_param);
     
     is_run_fw = true;
-    is_update_fw = true;
   }
   logPrintf("\n");
 
-  if (is_update_fw)
-  {
-    logPrintf("[  ] bootUpdateFirm()\n");
-    err_code = bootUpdateFirm();
-    if (err_code == OK)
-      logPrintf("[OK]\n");
-    else
-      logPrintf("[E_] err : 0x%04X\n", err_code);    
-  }
 
   if (is_run_fw)
   {  

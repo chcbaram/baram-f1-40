@@ -107,17 +107,10 @@ void uf2_flash_write(WriteState *state, uint32_t addr, void const *data, uint32_
 
 void uf2_flash_complete(WriteState *state)
 {
-  uint16_t err_code;
-
   if (is_jump_fw)
     return;
 
-  err_code = bootUpdateFirm();
-  logPrintf("[%s] bootUpdateFirm()\n", err_code==OK?"OK":"E_");
-  if (err_code == OK)
-  {
-    is_jump_fw = true;
-  }
+  is_jump_fw = true;
 }
 
 //--------------------------------------------------------------------+
