@@ -13,7 +13,7 @@
 #define _USE_HW_MICROS
 #define _USE_HW_FLASH
 #define _USE_HW_KEYS
-
+#define _USE_HW_USB
 
 #define _USE_HW_LED
 #define      HW_LED_MAX_CH          1

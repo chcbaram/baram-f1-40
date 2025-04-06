@@ -22,7 +22,7 @@ extern "C" {
 #include "rtc.h"
 #include "reset.h"
 #include "qspi.h"
-// #include "usb.h"
+#include "usb.h"
 #include "util_core.h"
 
 bool hwInit(void);

@@ -32,8 +32,7 @@ const static uint16_t col_bit_tbl[MATRIX_COLS] = {1 << 7,
                                                   1 << 1,
                                                   1 << 0};
 
-__attribute__((section(".non_cache")))
-static uint16_t col_rd_buf[MATRIX_ROWS];
+static uint16_t col_rd_buf[MATRIX_ROWS] = {0,};
 
 
 
@@ -46,7 +45,6 @@ static DMA_HandleTypeDef hdma_tim1_up;
 
 bool keysInit(void)
 {
-  memset(col_rd_buf, 0, sizeof(col_rd_buf));
 
   keysInitGpio();
   keysInitDma();

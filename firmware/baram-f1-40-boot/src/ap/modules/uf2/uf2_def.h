@@ -7,15 +7,15 @@ extern "C" {
 
 #include "ap_def.h"
 
-#define UF2_PRODUCT_NAME          "BARAM-H7S-8K"
-#define UF2_BOARD_ID              "BARAM-H7S"
+#define UF2_PRODUCT_NAME          "BARAM-F1-40"
+#define UF2_BOARD_ID              "BARAM-F1-40"
 #define UF2_VOLUME_LABEL          "BOOT"
 #define UF2_INDEX_URL             "https://"
 
 
 #define BOARD_FLASH_ADDR_ZERO     FLASH_ADDR_FIRM
 #define BOARD_FLASH_APP_START     FLASH_ADDR_FIRM
-#define BOARD_UF2_FAMILY_ID       0xFFFF0002
+#define BOARD_UF2_FAMILY_ID       0xFFFF0003
 
 
 

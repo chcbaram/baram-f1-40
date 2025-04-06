@@ -35,23 +35,21 @@
 // Board Specific Configuration
 //--------------------------------------------------------------------+
 
-#define BOARD_TUD_RHPORT      1
-#define BOARD_TUD_MAX_SPEED   OPT_MODE_HIGH_SPEED
+#define BOARD_TUD_RHPORT      0
+#define BOARD_TUD_MAX_SPEED   OPT_MODE_FULL_SPEED
 
 //--------------------------------------------------------------------
 // Common Configuration
 //--------------------------------------------------------------------
 
-#define CFG_TUSB_MCU          OPT_MCU_STM32H7RS
+#define CFG_TUSB_MCU          OPT_MCU_STM32F4
 #define CFG_TUSB_OS           OPT_OS_NONE
-
-#ifndef CFG_TUSB_DEBUG
 #define CFG_TUSB_DEBUG        0
-#endif
+
 
 // Enable Device stack
 #define CFG_TUD_ENABLED       1
-#define CFG_TUSB_RHPORT1_MODE (OPT_MODE_DEVICE | OPT_MODE_HIGH_SPEED)
+#define CFG_TUSB_RHPORT0_MODE OPT_MODE_DEVICE
 
 // Default is max speed that hardware controller could support with on-chip PHY
 #define CFG_TUD_MAX_SPEED     BOARD_TUD_MAX_SPEED

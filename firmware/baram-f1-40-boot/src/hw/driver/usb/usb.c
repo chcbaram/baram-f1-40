@@ -20,11 +20,9 @@ bool usbInit(void)
 
 void usbDeInit(void)
 {
-  __HAL_RCC_USB_OTG_HS_CLK_DISABLE();
-  __HAL_RCC_USBPHYC_CLK_DISABLE();
+  __HAL_RCC_USB_OTG_FS_CLK_DISABLE();
 
-  /* USB_OTG_HS interrupt Deinit */
-  HAL_NVIC_DisableIRQ(OTG_HS_IRQn);  
+  HAL_NVIC_DisableIRQ(OTG_FS_IRQn);  
 }
 
 void usbUpdate(void)
@@ -44,31 +42,28 @@ void tud_umount_cb(void)
 
 void usbInitPhy(void)
 {
-  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  /**USB_OTG_FS GPIO Configuration
+  PA11     ------> USB_OTG_FS_DM
+  PA12     ------> USB_OTG_FS_DP
+  */
+  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USBPHYC;
-  PeriphClkInit.UsbPhycClockSelection = RCC_USBPHYCCLKSOURCE_HSE;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
-  {
-    Error_Handler();
-  }
+  __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
 
-  HAL_PWREx_EnableUSBVoltageDetector();
-
-  /* USB_OTG_HS clock enable */
-  __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
-  __HAL_RCC_USBPHYC_CLK_ENABLE();
-
-  // Disable VBUS sense (B device)
-  USB_OTG_HS->GCCFG &= ~USB_OTG_GCCFG_VBDEN;
-
-  // B-peripheral session valid override enable
-  USB_OTG_HS->GCCFG |= USB_OTG_GCCFG_VBVALEXTOEN;
-  USB_OTG_HS->GCCFG |= USB_OTG_GCCFG_VBVALOVAL;  
+  // Disable VBUS sense
+  USB_OTG_FS->GCCFG |= USB_OTG_GCCFG_NOVBUSSENS;
 }
 
-void OTG_HS_IRQHandler(void)
+void OTG_FS_IRQHandler(void)
 {
   tud_int_handler(BOARD_TUD_RHPORT);
 }

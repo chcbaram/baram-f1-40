@@ -5,7 +5,7 @@
 
 
 #define USB_MANUFACTURER  "BARAM"
-#define USB_DEVICE        "BARAM-H7S-8K"
+#define USB_DEVICE        "BARAM-F1-40"
 #define USB_INTERFACE_CDC "BARAM CDC"
 #define USB_INTERFACE_MSG "BARAM MSC"
 

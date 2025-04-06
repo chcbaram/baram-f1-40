@@ -16,7 +16,7 @@ project(${PRJ_NAME}
 
 set(EXECUTABLE ${PRJ_NAME}.elf)
 
-# include(src/hw/driver/usb/CMakeLists.txt)
+include(src/hw/driver/usb/CMakeLists.txt)
 
 # 지정한 폴더에 있는 파일만 포함한다.
 #
@@ -25,7 +25,7 @@ file(GLOB SRC_FILES CONFIGURE_DEPENDS
   src/*.c
   src/ap/*.cpp
   src/ap/*.c
-  # src/ap/modules/uf2/*.c
+  src/ap/modules/uf2/*.c
   src/ap/modules/boot/*.c
   src/bsp/*.c
   src/bsp/device/*.c
@@ -33,6 +33,7 @@ file(GLOB SRC_FILES CONFIGURE_DEPENDS
   src/hw/*.c
   src/hw/driver/*.c
   src/hw/driver/eeprom/*.c
+  src/hw/driver/usb/*.c
 
   src/lib/ST/STM32_USB_Device_Library/Core/Src/*.c
 )
@@ -117,7 +118,7 @@ target_compile_options(${EXECUTABLE} PRIVATE
 
   -Wall
   -g3
-  -Os
+  -Og
   )
 
 target_link_options(${EXECUTABLE} PRIVATE
