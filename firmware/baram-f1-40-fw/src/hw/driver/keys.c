@@ -44,10 +44,17 @@ static DMA_HandleTypeDef hdma_tim1_up;
 
 bool keysInit(void)
 {
+  // 이전 설정 초기화
+  //
+  TIM1->CR1 = 0;
+  TIM1->CR2 = 0;
+  TIM1->CNT = 0;
+  __HAL_TIM_DISABLE_DMA(&htim1, TIM_DMA_CC1);
+  __HAL_TIM_DISABLE_DMA(&htim1, TIM_DMA_UPDATE);
 
   keysInitGpio();
-  keysInitDma();
   keysInitTimer();
+  keysInitDma();
 
   HAL_TIM_Base_Start(&htim1);
   HAL_TIM_OC_Start(&htim1, TIM_CHANNEL_1);
